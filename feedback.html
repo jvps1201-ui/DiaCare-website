@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | DiaCare Connect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">DiaCare Connect</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="diabetes.html">Diabetes</a>
+            <a href="kit.html">Our Kit</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="protocol.html">Protocol</a>
+            <a href="camps.html">Camps</a>
+            <a href="business.html">Business</a>
+            <a href="partner.html">Partner</a>
+            <a href="feedback.html" class="active">Feedback</a>
+        </div>
+    </nav>
+
+    <header class="page-hero">
+        <h1>We Value Your Feedback</h1>
+        <p>Your suggestions can help us improve the DiaCare Connect community screening concept.</p>
+    </header>
+
+    <section class="feedback-section">
+
+        <div class="feedback-intro">
+            <h2>Tell Us What You Think</h2>
+            <p>Share your opinion about our website, screening kit and community healthcare concept.</p>
+        </div>
+
+        <form id="feedbackForm" class="feedback-form">
+
+            <label for="visitor">Your Name (Optional)</label>
+            <input type="text" id="visitor" placeholder="Enter your name">
+
+            <label>How would you rate our concept?</label>
+            <div class="rating-options">
+                <label><input type="radio" name="rating" value="Excellent" required> Excellent</label>
+                <label><input type="radio" name="rating" value="Good"> Good</label>
+                <label><input type="radio" name="rating" value="Average"> Average</label>
+                <label><input type="radio" name="rating" value="Needs Improvement"> Needs Improvement</label>
+            </div>
+
+            <label for="useful">Which feature did you find most useful?</label>
+            <select id="useful" required>
+                <option value="">Select a feature</option>
+                <option>Diabetes Information</option>
+                <option>Screening Kit</option>
+                <option>Risk Assessment</option>
+                <option>Screening Protocol</option>
+                <option>Community Camps</option>
+                <option>Business Model</option>
+            </select>
+
+            <label for="suggestions">Your Suggestions</label>
+            <textarea id="suggestions" rows="5" placeholder="Write your suggestions here..."></textarea>
+
+            <button type="submit" class="btn">Submit Feedback</button>
+            <button type="reset" class="btn feedback-reset">Clear Form</button>
+
+        </form>
+
+        <div id="feedbackMessage" class="feedback-message" aria-live="polite" hidden>
+            <h3>Thank You!</h3>
+            <p>Your feedback has been displayed successfully in this demo.</p>
+            <p><strong>Note:</strong> This prototype does not transmit or save feedback.</p>
+        </div>
+
+    </section>
+
+    <section class="feedback-bottom">
+        <h2>Small Steps. Healthier Communities.</h2>
+        <p>DiaCare Connect aims to make diabetes awareness and professional referral support more accessible.</p>
+        <a href="index.html" class="btn">Back to Home</a>
+    </section>
+
+    <footer>
+        <p>© 2026 DiaCare Connect | Community Diabetes Screening Project</p>
+        <p>Educational prototype — not a medical diagnostic service.</p>
+    </footer>
+
+    <script>
+        const feedbackForm = document.getElementById("feedbackForm");
+        const feedbackMessage = document.getElementById("feedbackMessage");
+
+        feedbackForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!feedbackForm.checkValidity()) {
+                feedbackForm.reportValidity();
+                return;
+            }
+
+            feedbackMessage.hidden = false;
+            feedbackMessage.scrollIntoView({ behavior: "smooth" });
+        });
+
+        feedbackForm.addEventListener("reset", function() {
+            feedbackMessage.hidden = true;
+        });
+    </script>
+
+</body>
+</html>

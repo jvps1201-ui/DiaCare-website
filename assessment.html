@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment | DiaCare Connect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">DiaCare Connect</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="diabetes.html">Diabetes</a>
+            <a href="kit.html">Our Kit</a>
+            <a href="assessment.html" class="active">Assessment</a>
+            <a href="protocol.html">Protocol</a>
+            <a href="camps.html">Camps</a>
+            <a href="business.html">Business</a>
+            <a href="partner.html">Partner</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </nav>
+
+    <header class="page-hero">
+        <h1>Diabetes Risk Awareness</h1>
+        <p>A simple educational questionnaire to demonstrate how community screening can identify people who may benefit from professional health assessment.</p>
+    </header>
+
+    <section class="assessment-section">
+        <div class="assessment-notice">
+            <h3>Important information</h3>
+            <p>This is a student-made demonstration. Its questions and scoring system are not clinically validated. It cannot diagnose diabetes or determine whether someone has the condition.</p>
+            <p><strong>Demo only:</strong> Please do not enter real personal or medical information.</p>
+        </div>
+
+        <form id="riskForm" class="assessment-form">
+
+            <div class="question-card">
+                <h3>1. What is the person's age group?</h3>
+                <label><input type="radio" name="age" value="0" required> Below 35 years</label>
+                <label><input type="radio" name="age" value="1"> 35–49 years</label>
+                <label><input type="radio" name="age" value="2"> 50 years or above</label>
+            </div>
+
+            <div class="question-card">
+                <h3>2. Is there a family history of diabetes?</h3>
+                <label><input type="radio" name="family" value="0" required> No</label>
+                <label><input type="radio" name="family" value="2"> Yes</label>
+            </div>
+
+            <div class="question-card">
+                <h3>3. Has the person been told they have high blood pressure?</h3>
+                <label><input type="radio" name="bp" value="0" required> No</label>
+                <label><input type="radio" name="bp" value="1"> Yes</label>
+            </div>
+
+            <div class="question-card">
+                <h3>4. Has the person previously been told they have high blood sugar?</h3>
+                <label><input type="radio" name="sugar" value="0" required> No</label>
+                <label><input type="radio" name="sugar" value="2"> Yes</label>
+            </div>
+
+            <div class="question-card">
+                <h3>5. How would you describe the person's physical activity?</h3>
+                <label><input type="radio" name="activity" value="0" required> Regular physical activity</label>
+                <label><input type="radio" name="activity" value="1"> Low physical activity</label>
+            </div>
+
+            <div class="question-card">
+                <h3>6. What is the waist measurement assessment?</h3>
+                <p class="question-note">The relevant threshold depends on the person's characteristics and local clinical guidance.</p>
+                <label><input type="radio" name="waist" value="0" required> Below the locally recommended threshold</label>
+                <label><input type="radio" name="waist" value="1"> At or above the locally recommended threshold</label>
+            </div>
+
+            <div class="question-card">
+                <h3>7. Does the person have a history of cardiovascular disease?</h3>
+                <label><input type="radio" name="cardio" value="0" required> No</label>
+                <label><input type="radio" name="cardio" value="1"> Yes</label>
+            </div>
+
+            <button type="submit" class="btn">Calculate Demo Score</button>
+            <button type="reset" class="btn reset-btn">Reset Answers</button>
+        </form>
+
+        <div id="result" class="result-box" aria-live="polite" hidden>
+            <h2>Demo Assessment Result</h2>
+            <p>Your prototype score: <strong id="score"></strong> / 10</p>
+            <h3 id="category"></h3>
+            <p id="message"></p>
+            <p class="result-warning">This score is for demonstration only. It is not a diagnosis, and it should not be used to make healthcare decisions. A qualified health professional can advise on appropriate testing, such as blood glucose or HbA1c testing.</p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 DiaCare Connect | Community Diabetes Screening Project</p>
+        <p>Educational prototype — not a medical diagnostic service.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("riskForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const fields = [
+                "age", "family", "bp", "sugar",
+                "activity", "waist", "cardio"
+            ];
+
+            let total = 0;
+
+            for (const field of fields) {
+                const selected = form.querySelector(
+                    'input[name="' + field + '"]:checked'
+                );
+
+                if (!selected) {
+                    return;
+                }
+
+                total += Number(selected.value);
+            }
+
+            document.getElementById("score").textContent = total;
+
+            let category = "";
+            let message = "";
+
+            if (total <= 2) {
+                category = "Low prototype score band";
+                message = "This is a low band in the demonstration scoring system. It does not rule out diabetes or replace appropriate health checks.";
+            } else if (total <= 5) {
+                category = "Moderate prototype score band";
+                message = "This is a moderate band in the demonstration scoring system. Discuss any health concerns with a qualified health professional.";
+            } else {
+                category = "High prototype score band";
+                message = "This is a high band in the demonstration scoring system. A qualified health professional can advise whether confirmatory testing is appropriate.";
+            }
+
+            document.getElementById("category").textContent = category;
+            document.getElementById("message").textContent = message;
+
+            result.hidden = false;
+            result.scrollIntoView({ behavior: "smooth" });
+        });
+
+        form.addEventListener("reset", function() {
+            result.hidden = true;
+        });
+    </script>
+
+</body>
+</html>
+
